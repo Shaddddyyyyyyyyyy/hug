@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Hug Day ❤️</title>
+<title>Happy Hug Day 💗</title>
 
 <style>
 * {
@@ -12,47 +12,61 @@
 
 body {
     margin: 0;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ffe4f2, #ffd6ec);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ffe6f2, #ffd6ec, #ffeaf6);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
+    overflow: hidden;
     color: #ff4da6;
-    overflow-x: hidden;
 }
 
+/* Card */
 .card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.75);
     padding: 30px 20px;
-    border-radius: 25px;
-    box-shadow: 0 8px 25px rgba(255, 182, 193, 0.5);
-    width: 100%;
-    max-width: 400px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.6);
+    width: 90%;
+    max-width: 380px;
+    position: relative;
+}
+
+/* Cute floating emojis */
+.floating {
+    position: fixed;
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 h1 {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
-    color: #ff69b4;
 }
 
-p {
+#typing {
+    min-height: 60px;
     font-size: 1rem;
     margin-bottom: 20px;
 }
 
+/* Button */
 button {
     width: 100%;
     padding: 14px;
-    font-size: 1rem;
     border: none;
-    border-radius: 25px;
-    background-color: #ff9ecf;
+    border-radius: 30px;
+    background: #ff9ecf;
     color: white;
+    font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -61,129 +75,96 @@ button:active {
     transform: scale(0.95);
 }
 
+/* Hug animation */
 .hug {
     font-size: 3rem;
-    margin-top: 20px;
+    margin-top: 15px;
     display: none;
     animation: pop 0.5s ease forwards;
 }
 
 @keyframes pop {
     0% { transform: scale(0); }
-    100% { transform: scale(1); }
-}
-
-/* Floating hearts */
-.hearts {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: -1;
-}
-
-.heart {
-    position: absolute;
-    color: #ffb6d9;
-    font-size: 18px;
-    animation: float 6s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh); opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
+    100% { transform: scale(1.2); }
 }
 
 /* Popup */
-#lovePopup {
+#popup {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 192, 203, 0.7);
+    inset: 0;
+    background: rgba(255,192,203,0.7);
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.popup-content {
+.popup-box {
     background: #fff0f8;
-    color: #ff4da6;
-    padding: 25px 20px;
-    border-radius: 20px;
-    text-align: center;
+    padding: 25px;
+    border-radius: 25px;
     width: 100%;
     max-width: 320px;
     animation: pop 0.4s ease;
-}
-
-/* Extra small devices */
-@media (max-width: 380px) {
-    h1 {
-        font-size: 1.6rem;
-    }
-
-    p {
-        font-size: 0.9rem;
-    }
-
-    .hug {
-        font-size: 2.5rem;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="hearts"></div>
-
 <div class="card">
-    <h1>Happy Hug Day ❤️</h1>
-    <p>To My Beautiful Girlfriend 💖<br>
-    Here's a biggest warmest virtual huggie for my girlfieee😘</p>
+    <h1>Happy Hug Day my baby💗</h1>
+    <div id="typing"></div>
 
-    <button onclick="sendHug()">Click for a Hug 🤗</button>
-    <div class="hug" id="hug">🤗💞</div>
+    <button onclick="sendHug()">Tap for a Cute Hug baby 💞</button>
+    <div class="hug" id="hug">🤗💗💞</div>
 </div>
 
-<div id="lovePopup">
-    <div class="popup-content">
-        <h2>🤗 Surprise Hug!</h2>
-        <p>You just received the biggest, warmest hug ever! 💕</p>
-        <p><strong>I Love You So Much mero pyaro girlfie my wifey my budi😘❤️</strong></p>
+<div id="popup">
+    <div class="popup-box">
+        <h2>Hehe Surpriseee 🥰</h2>
+        <p>You just received the softest, warmest, cuddliest hug everrr 💕</p>
+        <p><strong>I love you soooo much mero pyaro girlfie my wifey my budi 😘🧸💗</strong></p>
         <button onclick="closePopup()">Close 💖</button>
     </div>
 </div>
 
 <script>
+// Typing effect
+const message = "To my beautiful girlfriend 💖 Here's the biggest warmest virtual huggie just for youuu my budii😘💞";
+let i = 0;
+function typeEffect() {
+    if (i < message.length) {
+        document.getElementById("typing").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 40);
+    }
+}
+window.onload = typeEffect;
+
+// Hug button
 function sendHug() {
     document.getElementById("hug").style.display = "block";
-    document.getElementById("lovePopup").style.display = "flex";
+    document.getElementById("popup").style.display = "flex";
 }
 
+// Close popup
 function closePopup() {
-    document.getElementById("lovePopup").style.display = "none";
+    document.getElementById("popup").style.display = "none";
 }
 
-const heartsContainer = document.querySelector('.hearts');
-
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 12) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    heartsContainer.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
+// Floating cute emojis
+function createFloating() {
+    const emojis = ["💗","🧸","✨","💞","🌸"];
+    const el = document.createElement("div");
+    el.className = "floating";
+    el.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (Math.random()*3+4) + "s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),6000);
 }
-
-setInterval(createHeart, 400);
+setInterval(createFloating, 800);
 </script>
 
 </body>
